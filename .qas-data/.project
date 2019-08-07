@@ -1,0 +1,20 @@
+{
+    "additionalFields": {
+        "mobileweb": {
+            "baseurl": "https://www.gmail.com"
+        },
+        "web": {
+            "baseurl": "https://www.gmail.com"
+        }
+    },
+    "framework": "jasmine",
+    "language": "typescript",
+    "projectSettings": {
+        "projectName": "Typescript_Jasmine",
+        "projectPath": "c:\\Users\\rinkesh.jain\\Desktop\\Sample"
+    },
+    "projectTypes": [
+        "web",
+        "mobileweb"
+    ]
+}
