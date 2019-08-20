@@ -9,9 +9,9 @@
             "elementKey": "",
             "elementDesc": "",
             "indexColumn": "",
-            "tcId": "7",
-            "tsId": 5,
-            "duration": 24908000000,
+            "tcId": "4",
+            "tsId": 2,
+            "duration": 25398000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -65,9 +65,9 @@
             "elementKey": "email.identifierid",
             "elementDesc": "identifierId email",
             "indexColumn": "",
-            "tcId": "7",
-            "tsId": 5,
-            "duration": 609000000,
+            "tcId": "4",
+            "tsId": 2,
+            "duration": 644000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -121,9 +121,9 @@
             "elementKey": "email.identifierid",
             "elementDesc": "identifierId email",
             "indexColumn": "",
-            "tcId": "7",
-            "tsId": 5,
-            "duration": 740000000,
+            "tcId": "4",
+            "tsId": 2,
+            "duration": 948000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -161,9 +161,9 @@
             "elementKey": "div.div2111",
             "elementDesc": "Text DIV2111",
             "indexColumn": "",
-            "tcId": "7",
-            "tsId": 5,
-            "duration": 712000000,
+            "tcId": "4",
+            "tsId": 2,
+            "duration": 754000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -217,8 +217,8 @@
             "elementKey": "email.identifierid",
             "elementDesc": "identifierId email",
             "indexColumn": "",
-            "tcId": "7",
-            "tsId": 5,
+            "tcId": "4",
+            "tsId": 2,
             "duration": 579000000,
             "errMessage": "",
             "isRowExpanded": false
@@ -265,9 +265,9 @@
             "elementKey": "div.div11111",
             "elementDesc": "Text DIV11111",
             "indexColumn": "",
-            "tcId": "7",
-            "tsId": 5,
-            "duration": 555000000,
+            "tcId": "4",
+            "tsId": 2,
+            "duration": 573000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -317,11 +317,26 @@
             "elementKey": "div.div11111",
             "elementDesc": "Text DIV11111",
             "indexColumn": "",
-            "tcId": "7",
-            "tsId": 5,
-            "duration": 690000000,
+            "tcId": "4",
+            "tsId": 2,
+            "duration": 807000000,
             "errMessage": "",
             "isRowExpanded": false
+        },
+        {
+            "indexColumn": "",
+            "command": "Wait For Visible",
+            "element": "password.qas2019_1",
+            "input": "",
+            "status": "NotRun",
+            "eArray": [
+                [
+                    "password.qas2019_1",
+                    "key"
+                ]
+            ],
+            "elementKey": "",
+            "elementDesc": ""
         },
         {
             "command": "Clear",
@@ -373,9 +388,9 @@
             "elementKey": "password.qas2019",
             "elementDesc": "QAS@2019 password",
             "indexColumn": "",
-            "tcId": "7",
-            "tsId": 5,
-            "duration": 685000000,
+            "tcId": "4",
+            "tsId": 2,
+            "duration": 760000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -429,9 +444,9 @@
             "elementKey": "password.qas2019",
             "elementDesc": "QAS@2019 password",
             "indexColumn": "",
-            "tcId": "7",
-            "tsId": 5,
-            "duration": 705000000,
+            "tcId": "4",
+            "tsId": 2,
+            "duration": 757000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -473,9 +488,9 @@
             "elementKey": "div.div111",
             "elementDesc": "Text DIV111",
             "indexColumn": "",
-            "tcId": "7",
-            "tsId": 5,
-            "duration": 703000000,
+            "tcId": "4",
+            "tsId": 2,
+            "duration": 817000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -529,9 +544,9 @@
             "elementKey": "password.qas2019",
             "elementDesc": "QAS@2019 password",
             "indexColumn": "",
-            "tcId": "7",
-            "tsId": 5,
-            "duration": 567000000,
+            "tcId": "4",
+            "tsId": 2,
+            "duration": 576000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -581,9 +596,9 @@
             "elementKey": "span.span1111",
             "elementDesc": "Text SPAN1111",
             "indexColumn": "",
-            "tcId": "7",
-            "tsId": 5,
-            "duration": 559000000,
+            "tcId": "4",
+            "tsId": 2,
+            "duration": 572000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -637,9 +652,9 @@
             "elementKey": "div.div11111",
             "elementDesc": "Text DIV11111",
             "indexColumn": "",
-            "tcId": "7",
-            "tsId": 5,
-            "duration": 738000000,
+            "tcId": "4",
+            "tsId": 2,
+            "duration": 902000000,
             "errMessage": "",
             "isRowExpanded": false
         }
@@ -664,5 +679,6 @@
         "tcId": 1
     },
     "testDataExample": [],
-    "executionStatus": "Passed"
+    "isTCValid": true,
+    "executionStatus": "NotRun"
 }
