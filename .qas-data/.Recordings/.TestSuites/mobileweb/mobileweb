@@ -9,9 +9,9 @@
             "elementKey": "",
             "elementDesc": "",
             "indexColumn": "",
-            "tcId": "4",
+            "tcId": "3",
             "tsId": 2,
-            "duration": 25398000000,
+            "duration": 3328000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -65,9 +65,9 @@
             "elementKey": "email.identifierid",
             "elementDesc": "identifierId email",
             "indexColumn": "",
-            "tcId": "4",
+            "tcId": "3",
             "tsId": 2,
-            "duration": 644000000,
+            "duration": 617000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -121,49 +121,9 @@
             "elementKey": "email.identifierid",
             "elementDesc": "identifierId email",
             "indexColumn": "",
-            "tcId": "4",
+            "tcId": "3",
             "tsId": 2,
-            "duration": 948000000,
-            "errMessage": "",
-            "isRowExpanded": false
-        },
-        {
-            "command": "Click",
-            "element": "div.div2111_1",
-            "eArray": [
-                [
-                    "xpath=//div[@id='view_container']/div/div/div[2]/div/div/div/form/span/section/div/span/div[3]",
-                    "xpath:idRelative"
-                ],
-                [
-                    "xpath=//span/div[3]",
-                    "xpath:position"
-                ],
-                [
-                    "xpath=(.//*[normalize-space(text()) and normalize-space(.)='Continue to Gmail'])[1]/following::div[18]",
-                    "xpath:neighbor"
-                ],
-                [
-                    "xpath=(.//*[normalize-space(text()) and normalize-space(.)='Sign in'])[1]/following::div[19]",
-                    "xpath:neighbor"
-                ],
-                [
-                    "div.div2111",
-                    "key"
-                ],
-                [
-                    "div.div2111_1",
-                    "key"
-                ]
-            ],
-            "input": "",
-            "status": "Passed",
-            "elementKey": "div.div2111",
-            "elementDesc": "Text DIV2111",
-            "indexColumn": "",
-            "tcId": "4",
-            "tsId": 2,
-            "duration": 754000000,
+            "duration": 811000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -217,9 +177,9 @@
             "elementKey": "email.identifierid",
             "elementDesc": "identifierId email",
             "indexColumn": "",
-            "tcId": "4",
+            "tcId": "3",
             "tsId": 2,
-            "duration": 579000000,
+            "duration": 538000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -265,9 +225,9 @@
             "elementKey": "div.div11111",
             "elementDesc": "Text DIV11111",
             "indexColumn": "",
-            "tcId": "4",
+            "tcId": "3",
             "tsId": 2,
-            "duration": 573000000,
+            "duration": 574000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -317,9 +277,9 @@
             "elementKey": "div.div11111",
             "elementDesc": "Text DIV11111",
             "indexColumn": "",
-            "tcId": "4",
+            "tcId": "3",
             "tsId": 2,
-            "duration": 807000000,
+            "duration": 880000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -328,7 +288,7 @@
             "command": "Wait For Visible",
             "element": "password.qas2019_1",
             "input": "",
-            "status": "NotRun",
+            "status": "Passed",
             "eArray": [
                 [
                     "password.qas2019_1",
@@ -336,7 +296,12 @@
                 ]
             ],
             "elementKey": "",
-            "elementDesc": ""
+            "elementDesc": "",
+            "tcId": "3",
+            "tsId": 2,
+            "duration": 852000000,
+            "errMessage": "",
+            "isRowExpanded": false
         },
         {
             "command": "Clear",
@@ -388,9 +353,9 @@
             "elementKey": "password.qas2019",
             "elementDesc": "QAS@2019 password",
             "indexColumn": "",
-            "tcId": "4",
+            "tcId": "3",
             "tsId": 2,
-            "duration": 760000000,
+            "duration": 693000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -444,9 +409,9 @@
             "elementKey": "password.qas2019",
             "elementDesc": "QAS@2019 password",
             "indexColumn": "",
-            "tcId": "4",
+            "tcId": "3",
             "tsId": 2,
-            "duration": 757000000,
+            "duration": 738000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -488,9 +453,9 @@
             "elementKey": "div.div111",
             "elementDesc": "Text DIV111",
             "indexColumn": "",
-            "tcId": "4",
+            "tcId": "3",
             "tsId": 2,
-            "duration": 817000000,
+            "duration": 775000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -544,9 +509,9 @@
             "elementKey": "password.qas2019",
             "elementDesc": "QAS@2019 password",
             "indexColumn": "",
-            "tcId": "4",
+            "tcId": "3",
             "tsId": 2,
-            "duration": 576000000,
+            "duration": 606000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -596,9 +561,9 @@
             "elementKey": "span.span1111",
             "elementDesc": "Text SPAN1111",
             "indexColumn": "",
-            "tcId": "4",
+            "tcId": "3",
             "tsId": 2,
-            "duration": 572000000,
+            "duration": 605000000,
             "errMessage": "",
             "isRowExpanded": false
         },
@@ -652,9 +617,9 @@
             "elementKey": "div.div11111",
             "elementDesc": "Text DIV11111",
             "indexColumn": "",
-            "tcId": "4",
+            "tcId": "3",
             "tsId": 2,
-            "duration": 902000000,
+            "duration": 805000000,
             "errMessage": "",
             "isRowExpanded": false
         }
@@ -680,5 +645,5 @@
     },
     "testDataExample": [],
     "isTCValid": true,
-    "executionStatus": "NotRun"
+    "executionStatus": "Passed"
 }
