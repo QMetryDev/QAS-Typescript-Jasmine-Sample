@@ -13,7 +13,7 @@ import { Global } from '../../support/global';
 module.exports = {
 	seleniumAddress: 'http://localhost:4723/wd/hub',
 	specs: ['./spec/mobileweb/*.js','./spec/mobileweb/**/*.js'],
-	baseUrl: 'https://www.gmail.com',
+	baseUrl: 'https://qas.qmetry.com/bank/',
 	framework: 'jasmine',
 	jasmineNodeOpts: {
 		showColors: true,
