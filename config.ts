@@ -1,4 +1,4 @@
-import { ConfigurationManager } from './base/configurationManager';
+import { ConfigurationManager } from './base/configurationmanager';
 
 let platform=ConfigurationManager.getBundle().get("platform");
 console.log("Plarform is :"+platform)
