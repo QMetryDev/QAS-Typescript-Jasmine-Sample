@@ -11,7 +11,8 @@
     "build": "tsc -p .",
     "test": "tsc -p . && protractor out/config.js",
     "posttest": "node out/base/uploader.js",
-    "uploadresults": "tsc -p . && node out/base/uploader.js"
+    "uploadresults": "tsc -p . && node out/base/uploader.js",
+    "updatechrome": "tsc -p . && node out/base/updatechrome.js"
   },
   "license": "ISC",
   "bugs": {
@@ -19,7 +20,6 @@
   },
   "homepage": "https://github.com/qualityshepherd/protractor_example",
   "dependencies": {
-    "appium-adb": "6.14.0",
     "chance": "0.7.5",
     "jasmine": "3.2.0",
     "jasmine-node": "2.0.1",
@@ -34,12 +34,12 @@
     "@types/properties-reader": "0.0.1",
     "babel-preset-env": "1.7.0",
     "babel-register": "6.24.1",
-    "eslint": "5.2.0",
     "chai": "^4.2.0",
+    "eslint": "5.2.0",
     "eslint-plugin-protractor": "1.40.0",
     "jasmine-core": "~3.0.0",
     "jasmine-spec-reporter": "2.7.0",
-    "protractor": "5.4.1",
+    "protractor": "^7.0.0",
     "protractor-beautiful-reporter": "1.2.1",
     "protractor-pretty-html-reporter": "0.0.16",
     "ts-node": "1.7.2",
