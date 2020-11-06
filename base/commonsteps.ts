@@ -492,4 +492,26 @@ export class CommonSteps {
 				throw err;
 			});
 	}
+	public async close(str) {
+		await browser.driver.close();
+	}
+
+	public async switchWinodw(index) {
+		 await browser.driver.getAllWindowHandles().then((windowArray) => {
+			browser.driver.switchTo().window(windowArray[index]);
+		});
+
+	}
+	public async implicitWait(time) {
+		if(time && /^[0-9]*$/mg.test(time.toString().trim())){
+		  protractor.browser.sleep(time).then(() => { }).catch(err => {throw err;});
+		}else{
+		  throw 'Invalid Input : '+time;
+		}
+	}
+	public async switchToDefaultWindow(str) {
+		await browser.driver.getAllWindowHandles().then((windowArray) => {
+			browser.driver.switchTo().window(windowArray[0]);
+		});
+    }
 }

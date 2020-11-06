@@ -46,7 +46,13 @@ import {
 	TEST_CASE_SPRINTID,
 	TEST_CASE_FIXVERSIONID,
 	TEST_CASE_FIELDS,
-	TEST_SUITE_FIELDS
+	TEST_SUITE_FIELDS,
+	TEST_CASE_DESCRIPTION,
+	TEST_CASE_ASSIGNEE,
+	TEST_CASE_CUSTOMFIELDS,
+	TEST_CYCLE_ASSIGNEE,
+	TEST_CYCLE_CUSTOMFIELDS,
+	TEST_CYCLE_DESCRIPTION
 } from "./Utils";
 import { ConfigurationManager } from "./configurationmanager";
 
@@ -276,7 +282,7 @@ function getExtraFieldMap(option_new) {
 	} else {
 		nonRequiredRequestParam();
 	}
-	if (!ON_PREMISE && INTEGRATION_TYPE.toString().toLowerCase() === "qtm4j" ||  INTEGRATION_TYPE.toString().toLowerCase() === "qtm4j4x") {
+	if (!ON_PREMISE && INTEGRATION_TYPE.toString().toLowerCase() === "qtm4j" || INTEGRATION_TYPE.toString().toLowerCase() === "qtm4j4x") {
 		Object.keys(extraFieldMap).forEach(function (key) {
 			var val = extraFieldMap[key];
 			if (val !== "" && val !== undefined && val !== null && val != 0) {
@@ -334,47 +340,47 @@ function doServerCall(filePath, response, apiKey, authorization_value, callback)
 
 	const start = new Date().getTime();
 	let option_new = {
-	  method: 'POST',
-	  url: response.body.url,
-	  headers: {
-			 'Content-Type': 'multipart/form-data',
-			  'apiKey': apiKey,
-			  'Authorization': 'Basic ' + authorization_value
-	  },
-	  json: false,
-	  enconding: null,
-	  formData: {
-		file: {
-		  value: fs.createReadStream(filePath),
-		  options: {
-			filename: path.basename(filePath),
-			contentType: null
-		  }
+		method: 'POST',
+		url: response.body.url,
+		headers: {
+			'Content-Type': 'multipart/form-data',
+			'apiKey': apiKey,
+			'Authorization': 'Basic ' + authorization_value
+		},
+		json: false,
+		enconding: null,
+		formData: {
+			file: {
+				value: fs.createReadStream(filePath),
+				options: {
+					filename: path.basename(filePath),
+					contentType: null
+				}
+			}
 		}
-	  }
 	};
 	try {
-	  console.log(" OPTION <<<<<<<<<<<<<<" + JSON.stringify(option_new));
-	  request(option_new, function requestTO(error, response, body) {
-		console.log("response :: %%%%%%%%%%%%%%%" + JSON.stringify(response));
-		if (error) {
-		  console.log("ERROR :: %%%%%%%%%%%%%%%" + JSON.stringify(error));
-		  console.log("IN ERROR ::");
-		  callback({ success: false, errMessage: error }); // TODO:
-		}
-		var end = new Date().getTime();
-		var time = end - start;
-		deleteZip(filePath);
-		callback({
-		  success: true,
-		  statusCode: response.statusCode,
-		  executionTime: time
+		console.log(" OPTION <<<<<<<<<<<<<<" + JSON.stringify(option_new));
+		request(option_new, function requestTO(error, response, body) {
+			console.log("response :: %%%%%%%%%%%%%%%" + JSON.stringify(response));
+			if (error) {
+				console.log("ERROR :: %%%%%%%%%%%%%%%" + JSON.stringify(error));
+				console.log("IN ERROR ::");
+				callback({ success: false, errMessage: error }); // TODO:
+			}
+			var end = new Date().getTime();
+			var time = end - start;
+			deleteZip(filePath);
+			callback({
+				success: true,
+				statusCode: response.statusCode,
+				executionTime: time
+			});
 		});
-	  });
 	} catch (e) {
-	  callback({ success: false, errMessage: e });
+		callback({ success: false, errMessage: e });
 	}
-  }
+}
 
 
 function checkValueIsBankOrNot(val) {
@@ -400,7 +406,10 @@ function nonRequiredRequest4xParam() {
 			'status': checkValueIsBankOrNot(TEST_CYCLE_STATUS),
 			'sprintId': checkValueIsBankOrNot(TEST_CYCLE_SPRINTID),
 			'fixVersionId': checkValueIsBankOrNot(TEST_CYCLE_FIXVERSIONID),
-			'summary': checkValueIsBankOrNot(TEST_CYCLE_SUMMARY) !== '' ? TEST_CYCLE_SUMMARY : 'Automated Test Cycle'
+			'summary': checkValueIsBankOrNot(TEST_CYCLE_SUMMARY) !== '' ? TEST_CYCLE_SUMMARY : 'Automated Test Cycle',
+			'description': checkValueIsBankOrNot(TEST_CYCLE_DESCRIPTION),
+			'assignee': checkValueIsBankOrNot(TEST_CYCLE_ASSIGNEE),
+			... (checkValueIsBankOrNot(TEST_CYCLE_CUSTOMFIELDS) !== '' && { 'customFields': JSON.parse(TEST_CYCLE_CUSTOMFIELDS.toString()) })
 		},
 		'testCase': {
 			'labels': checkValueIsBankOrNot(TEST_CASE_LABELS) !== '' ? TEST_CASE_LABELS.toString().split(',') : [],
@@ -408,7 +417,10 @@ function nonRequiredRequest4xParam() {
 			'priority': checkValueIsBankOrNot(TEST_CASE_PRIORITY),
 			'status': checkValueIsBankOrNot(TEST_CASE_STATUS),
 			'sprintId': checkValueIsBankOrNot(TEST_CASE_SPRINTID),
-			'fixVersionId': checkValueIsBankOrNot(TEST_CASE_FIXVERSIONID)
+			'fixVersionId': checkValueIsBankOrNot(TEST_CASE_FIXVERSIONID),
+			'description': checkValueIsBankOrNot(TEST_CASE_DESCRIPTION),
+			'assignee': checkValueIsBankOrNot(TEST_CASE_ASSIGNEE),
+			... (checkValueIsBankOrNot(TEST_CASE_CUSTOMFIELDS) !== '' && { 'customFields': JSON.parse(TEST_CASE_CUSTOMFIELDS.toString()) })
 		}
 	};
 
