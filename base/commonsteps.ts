@@ -514,4 +514,27 @@ export class CommonSteps {
 			browser.driver.switchTo().window(windowArray[0]);
 		});
     }
+	public async maximizeWindow() {
+		await browser.driver.manage().window().maximize();
+	}
+	public async dragAndDrop(locator,locator2) {
+		await this.waitForPresence(locator);
+		await browser.actions().dragAndDrop(await element(locatorUtil.getLocator(locator).locator),await element(locatorUtil.getLocator(locator2).locator)).mouseUp().perform()
+		.then(() => { })
+		.catch(err => {
+			throw err;
+		});
+	}
+	public async dragAndDropOffset(locator,locator2) {
+			await this.waitForPresence(locator);
+			if(parseInt(locator2.split(',')[0])){
+				await browser.actions().dragAndDrop(await element(locatorUtil.getLocator(locator).locator),{x: parseInt(locator2.split(',')[0]), y: parseInt(locator2.split(',')[1])}).mouseUp().perform()
+				.then(() => { })
+				.catch(err => {
+					throw err;
+				});
+			}else{
+				throw 'invalid Offset input'
+			}
+	}
 }
