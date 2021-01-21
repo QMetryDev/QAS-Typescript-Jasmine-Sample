@@ -5,6 +5,49 @@ let properties = ConfigurationManager.getBundle();
 
 var EC = protractor.ExpectedConditions;
 let locatorUtil = new LocatorUtils();
+let jsScript=`function simulateDragDrop(sourceNode, destinationNode) {
+	var EVENT_TYPES = {
+	DRAG_END: 'dragend',
+	DRAG_START: 'dragstart',
+	DROP: 'drop'
+	}
+
+	function createCustomEvent(type) {
+	var event = new CustomEvent("CustomEvent")
+	event.initCustomEvent(type, true, true, null)
+	event.dataTransfer = {
+	data: {
+	},
+	setData: function(type, val) {
+	this.data[type] = val
+	},
+	getData: function(type) {
+	return this.data[type]
+	}
+	}
+	return event
+	}
+
+	function dispatchEvent(node, type, event) {
+	if (node.dispatchEvent) {
+	return node.dispatchEvent(event)
+	}
+	if (node.fireEvent) {
+	return node.fireEvent("on" + type, event)
+	}
+	}
+
+	var event = createCustomEvent(EVENT_TYPES.DRAG_START)
+	dispatchEvent(sourceNode, EVENT_TYPES.DRAG_START, event)
+
+	var dropEvent = createCustomEvent(EVENT_TYPES.DROP)
+	dropEvent.dataTransfer = event.dataTransfer
+	dispatchEvent(destinationNode, EVENT_TYPES.DROP, dropEvent)
+
+	var dragEndEvent = createCustomEvent(EVENT_TYPES.DRAG_END)
+	dragEndEvent.dataTransfer = event.dataTransfer
+	dispatchEvent(sourceNode, EVENT_TYPES.DRAG_END, dragEndEvent)
+	}`;
 
 export class CommonSteps {
 	public async addLocator(locatorName, functionOrScript) {
@@ -449,11 +492,7 @@ export class CommonSteps {
 			) {
 				await protractor.browser
 					.switchTo()
-					.frame(
-						locatorUtil
-							.getLocator(nameOrIndex)
-							.actualLocatorString.split("=", 2)[1]
-					);
+					.frame(element(locatorUtil.getLocator(nameOrIndex).locator).getWebElement());
 			} else {
 				await protractor.browser.switchTo().frame(nameOrIndex);
 			}
@@ -497,44 +536,58 @@ export class CommonSteps {
 	}
 
 	public async switchWinodw(index) {
-		 await browser.driver.getAllWindowHandles().then((windowArray) => {
+		await browser.driver.getAllWindowHandles().then((windowArray) => {
 			browser.driver.switchTo().window(windowArray[index]);
 		});
 
 	}
 	public async implicitWait(time) {
-		if(time && /^[0-9]*$/mg.test(time.toString().trim())){
-		  protractor.browser.sleep(time).then(() => { }).catch(err => {throw err;});
-		}else{
-		  throw 'Invalid Input : '+time;
+		if (time && /^[0-9]*$/mg.test(time.toString().trim())) {
+			protractor.browser.sleep(time).then(() => { }).catch(err => { throw err; });
+		} else {
+			throw 'Invalid Input : ' + time;
 		}
 	}
 	public async switchToDefaultWindow(str) {
 		await browser.driver.getAllWindowHandles().then((windowArray) => {
 			browser.driver.switchTo().window(windowArray[0]);
 		});
-    }
+	}
 	public async maximizeWindow() {
 		await browser.driver.manage().window().maximize();
 	}
-	public async dragAndDrop(locator,locator2) {
+	public async dragAndDrop(locator, locator2) {
 		await this.waitForPresence(locator);
-		await browser.actions().dragAndDrop(await element(locatorUtil.getLocator(locator).locator),await element(locatorUtil.getLocator(locator2).locator)).mouseUp().perform()
-		.then(() => { })
-		.catch(err => {
-			throw err;
-		});
+		await browser.executeScript(jsScript + "simulateDragDrop(arguments[0], arguments[1])", await element(locatorUtil.getLocator(locator).locator), await element(locatorUtil.getLocator(locator2).locator))
+			.then(() => { })
+			.catch(err => {
+				throw err;
+			});
+		await browser.actions().dragAndDrop(await element(locatorUtil.getLocator(locator).locator), await element(locatorUtil.getLocator(locator2).locator)).mouseUp().perform()
+			.then(() => { })
+			.catch(err => {
+				throw err;
+			});
 	}
-	public async dragAndDropOffset(locator,locator2) {
-			await this.waitForPresence(locator);
-			if(parseInt(locator2.split(',')[0])){
-				await browser.actions().dragAndDrop(await element(locatorUtil.getLocator(locator).locator),{x: parseInt(locator2.split(',')[0]), y: parseInt(locator2.split(',')[1])}).mouseUp().perform()
+	public async dragAndDropValue(locator, JSvalue) {
+		await this.waitForPresence(locator);
+		let executScriptValue = "arguments[0].setAttribute('value'," + JSvalue + ");if(typeof(arguments[0].onchange) === 'function'){arguments[0].onchange('');}";
+		await browser.executeScript(executScriptValue, await element(locatorUtil.getLocator(locator).locator))
+			.then(() => { })
+			.catch(err => {
+				throw err;
+			});
+	}
+	public async dragAndDropOffset(locator, locator2) {
+		await this.waitForPresence(locator);
+		if (parseInt(locator2.split(',')[0])) {
+			await browser.actions().dragAndDrop(await element(locatorUtil.getLocator(locator).locator), { x: parseInt(locator2.split(',')[0]), y: parseInt(locator2.split(',')[1]) }).mouseUp().perform()
 				.then(() => { })
 				.catch(err => {
 					throw err;
 				});
-			}else{
-				throw 'invalid Offset input'
-			}
+		} else {
+			throw 'invalid Offset input'
+		}
 	}
 }
