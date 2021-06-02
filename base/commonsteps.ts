@@ -153,6 +153,9 @@ export class CommonSteps {
 			});
 	}
 	public async verifyTitle(title) {
+		if (title.startsWith("${")) {
+			title = properties.get(title.substring(2, title.length - 1));
+		}
 		browser.getTitle().then(pageTitle => {
 			expect(title).toEqual(
 				pageTitle,
@@ -198,6 +201,9 @@ export class CommonSteps {
 	}
 
 	public async verifyText(locator, text) {
+		if (text.startsWith("${")) {
+			text = properties.get(text.substring(2, text.length - 1));
+		}
 		await element(locatorUtil.getLocator(locator).locator)
 			.getText()
 			.then(textOfElement => {
@@ -589,5 +595,101 @@ export class CommonSteps {
 		} else {
 			throw 'invalid Offset input'
 		}
+	}
+	public async waitForAlert(time)  {
+		if(time && /^[0-9]*$/mg.test(time.trim())){
+			var timeout = +time.trim();
+			await browser.driver.wait(protractor.until.alertIsPresent(), timeout).then(function() {
+			});
+		}else{
+			throw 'Invalid Input : '+time;
+		}
+	}
+	public async dismissAlert(time)  {
+				await browser.driver.switchTo().alert().dismiss();
+	}
+	public async acceptAlert(time)  {
+				await browser.driver.switchTo().alert().accept();
+	}
+	public async getAlertText(time)  {
+			await browser.driver.switchTo().alert().getText();
+	}
+	public async setAlertText(text)  {
+			await browser.driver.switchTo().alert().sendKeys(text);
+	}
+	public async verifyAlertNotPresent(time)  {
+		if(time && /^[0-9]*$/mg.test(time.trim())){
+			var timeout = +time.trim();
+			return new Promise((resolve, reject) => {
+				browser.driver.wait(protractor.until.alertIsPresent(), timeout)
+			   .then(isVisible => {
+				   if (isVisible) {
+					   reject(new Error("Alert is present"));
+				   }else {
+						resolve();
+				   }
+			   })
+			   .catch(err => {
+				   resolve();
+			   });
+		   });
+		}
+	}
+	public async verifyAlertPresent(time)  {
+		if(time && /^[0-9]*$/mg.test(time.trim())){
+			var timeout = +time.trim();
+			await browser.driver.wait(protractor.until.alertIsPresent(), timeout).then(function() {
+			}).catch(err => {
+				throw 'Alert is not present. '+err;
+			});
+		}else{
+			throw 'Invalid Input : '+time;
+		}
+	}
+	public async executeJavaScript(jsScriptInput) {
+		await browser.executeScript(jsScriptInput)
+		.then(() => { })
+		.catch(err => {
+			throw err;
+		});
+	}
+	public async executeAsyncJavaScript(jsScriptInput) {
+		await browser.executeAsyncScript(jsScriptInput)
+		.then(() => { })
+		.catch(err => {
+			throw err;
+		});
+	}
+	public async storeValueIntoVariable(locator,varKey) {
+		properties.set(varKey,await element(locatorUtil.getLocator(locator).locator).getAttribute("value"));
+	}
+	public async storeTextIntoVariable(locator,varKey) {
+		properties.set(varKey,await element(locatorUtil.getLocator(locator).locator).getText());
+	}
+	public async storeTitleIntoVariable(varKey) {
+		properties.set(varKey,await browser.driver.getTitle())
+	}
+	public async verifySelected(locator) {
+		let condition = EC.presenceOf(browser.element(locatorUtil.getLocator(locator).locator));
+		 await browser.wait(condition, 5000).catch(reason => {
+			expect(reason).toBeUndefined("Element (" +
+				locatorUtil.getLocator(locator).description +
+				") was not present");
+		});
+		expect( await browser.element(locatorUtil.getLocator(locator).locator).isSelected()).toBe(true, "Element " +
+			locatorUtil.getLocator(locator).description +
+			" should be selected");
+	}
+
+	public async verifyNotSelected(locator) {
+			let condition = EC.presenceOf(browser.element(locatorUtil.getLocator(locator).locator));
+			await browser.wait(condition, 5000).catch(reason => {
+				expect(reason).toBeUndefined("Element (" +
+					locatorUtil.getLocator(locator).description +
+					") was not present");
+			});
+			expect(await browser.element(locatorUtil.getLocator(locator).locator).isSelected()).toBe(false, "Element " +
+				locatorUtil.getLocator(locator).description +
+				" should not be selected");
 	}
 }
