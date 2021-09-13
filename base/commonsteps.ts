@@ -611,9 +611,9 @@ export class CommonSteps {
 	public async acceptAlert(time)  {
 				await browser.driver.switchTo().alert().accept();
 	}
-	public async getAlertText(time)  {
-			await browser.driver.switchTo().alert().getText();
-	}
+	public async getAlertText(input)  {
+		await properties.set(input,await browser.driver.switchTo().alert().getText());
+    }
 	public async setAlertText(text)  {
 			await browser.driver.switchTo().alert().sendKeys(text);
 	}
@@ -691,5 +691,19 @@ export class CommonSteps {
 			expect(await browser.element(locatorUtil.getLocator(locator).locator).isSelected()).toBe(false, "Element " +
 				locatorUtil.getLocator(locator).description +
 				" should not be selected");
+	}
+	
+	public async sendEncryptedKeys(val, locator) {
+		this.waitForPresence(locator);
+		val = Buffer.from(val, "base64").toString("ascii");
+		if (val.startsWith("${")) {
+			val = properties.get(val.substring(2, val.length - 1));
+		}
+		await element(locatorUtil.getLocator(locator).locator)
+			.sendKeys(val)
+			.then(() => { })
+			.catch(err => {
+				throw err;
+			});
 	}
 }
